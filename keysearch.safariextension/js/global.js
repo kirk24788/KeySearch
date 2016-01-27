@@ -1,5 +1,15 @@
 // TODO: Context menu for add keyword
 
+String.prototype.endsWith = function(pattern) {
+    var d = this.length - pattern.length;
+    return d >= 0 && this.lastIndexOf(pattern) === d;
+};
+
+String.prototype.startsWith = function(searchString, position) {
+    position = position || 0;
+    return this.indexOf(searchString, position) === position;
+};
+
 // Runs once per browser session
 $(function() {
 	Store.upgrade();
@@ -46,7 +56,7 @@ $(function() {
 	}
 	// After all upgrades and new installations:
 	ext.settings.version = 212;
-	
+
 });
 
 // Handle messages received from injected script
@@ -118,11 +128,21 @@ function parseQuery(textEntered) {
 		if (data) {
 			if (!data.enabled || key == 'default') data = null;
 		}
+		var searchDomains = ext.settings.searchDomains.split(/[\s,;]+/);
+		for (var idx in searchDomains) {
+			if (key.endsWith(searchDomains[idx])) {
+				if(key.startsWith("http://") || key.startsWith("https://")) {
+					return {key:'default', query:'', url:key, subtext:key};
+				} else {
+					return {key:'default', query:'', url:"http://"+key, subtext:key};
+				}
+			}
+		}
 		if (!data) {
-			data = Store.getItem('default');				
+			data = Store.getItem('default');
 			if (!data || !data.enabled) return;
 			query = (query == '') ? key : (key+' '+query)
-			key = 'default';									
+			key = 'default';
 		}
 		url = data.url.replace('@@@', encodeURIComponent(query).replace(/%20/g,'+'));
 		try {
@@ -183,7 +203,7 @@ function performCommand(e) {
 			}
 		});
 		popWindow.Pop.transition('add');
-	}	
+	}
 }
 
 function validateCommand(e) {
@@ -226,7 +246,7 @@ function handleBeforeSearch(e) {
 const app = safari.application,
 	  ext = safari.extension;
 	  popWindow = ext.popovers[0].contentWindow;
-	  
+
 // Event listeners
 app.addEventListener('message', handleMessage, false);
 app.addEventListener('command', performCommand, false);

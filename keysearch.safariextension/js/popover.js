@@ -11,11 +11,11 @@ var Pop = {
 	popoverOpened: function(e){
 		// Popover opened
 	},
-	
+
 	handleKeydown: function(e){
 		k = parseInt(e.keyIdentifier.replace('U+',''), 16);
 	},
-	
+
 	handleKeypress: function(e){
 		shortcut  = k;
 		shortcut += e.shiftKey * 1000;
@@ -35,7 +35,7 @@ var Pop = {
 			e.preventDefault();
 		}
 	},
-	
+
 	transition: function(page, qString) {
 		var url = ext.baseURI+page+'.html';
 		switch(page) {
@@ -45,7 +45,7 @@ var Pop = {
 			break;
 		case 'settings':
 			width = 404;
-			height = 304;
+			height = 404;
 			break;
 		case 'keywords':
 			width = 674;
@@ -69,9 +69,9 @@ var Pop = {
 			safari.self.width = width;
 			safari.self.height = height;
 			safari.self.contentWindow.location.href = url;
-		});	
+		});
 	},
-	
+
 	shortcutInit: function() {
 		$('#shortcut').focus(function() {
 			$('#shortcutDisplay span').fadeOut(300);
@@ -83,7 +83,7 @@ var Pop = {
 		});
 		Pop.displayShortcut();
 	},
-	
+
 	displayShortcut: function() {
 		$('#shortcutDisplay span').remove();
 		var shortcut = $('#shortcut').val();
@@ -111,12 +111,12 @@ var Pop = {
 		$('#shortcutDisplay span').each(function() {widthSum += ($(this).outerWidth()+6);});
 		$('#shortcutDisplay, #shortcut').animate({width: widthSum+'px'}, 300);
 	}
-	
+
 };
 
 $(function() {
 	$('html').fadeIn(500);
-	
+
 	$('#back').click(function() {
 		Pop.transition('search');
 	});

@@ -1,5 +1,5 @@
 $(function() {
-	$('#shortcut').val(ext.settings.shortcut); 	
+	$('#shortcut').val(ext.settings.shortcut);
  	$('#'+ext.settings.resultsType).prop('checked', true);
  	$('#'+ext.settings.shortcutAction).prop('checked', true);
  	$('#enableAddressBar').prop('checked', ext.settings.enableAddressBar);
@@ -9,6 +9,10 @@ $(function() {
  	$('input[type="checkbox"]').click(function() {
  		ext.settings.setItem($(this).attr('name'), $(this).prop('checked'));
  	});
+    $( "#searchdomains" ).val(ext.settings.searchDomains);
+    $( "#searchdomains" ).change(function() {
+        ext.settings.setItem($(this).attr('name'), $(this).val());
+    });
  	Pop.shortcutInit();
 });
 

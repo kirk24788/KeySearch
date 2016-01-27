@@ -40,5 +40,11 @@
 		<key>Key</key>
 		<string>enableAddressBar</string>
 	</dict>
+	<dict>
+		<key>DefaultValue</key>
+		<string>.lan</string>
+		<key>Key</key>
+		<string>searchDomains</string>
+	</dict>
 </array>
 </plist>

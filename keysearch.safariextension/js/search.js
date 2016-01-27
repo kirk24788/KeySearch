@@ -4,7 +4,7 @@ $(function() {
 
 	var ksField = $('#keysearchField'),
 		keyword = decodeURIComponent(window.location.search.substring(1));
-	
+
 	if (keyword) {
 		ksField.val(keyword+' ');
 		ksField.focus();
@@ -22,13 +22,13 @@ $(function() {
 			}
 		}
 	});
-	
+
 	$('#searchSettings').prop('selectedIndex', -1).click(function() {
 		if ($(this).val()) {
 			Pop.transition($(this).val(), 800, 500);
 		}
 	});
-	
+
 	$('#helpButton').click(function() {
 		gbl.openUrl('http://www.macosxtips.co.uk/keysearch/help', 'foreground');
 		safari.self.hide();

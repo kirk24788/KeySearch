@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>Author</key>
-	<string>Matt Swain</string>
+	<string>Matt Swain, Mario Mancino</string>
 	<key>Builder Version</key>
-	<string>8536.26.17</string>
+	<string>11601.4.4</string>
 	<key>CFBundleDisplayName</key>
 	<string>KeySearch</string>
 	<key>CFBundleIdentifier</key>
@@ -13,9 +13,9 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleShortVersionString</key>
-	<string>2.1.2</string>
+	<string>2.1.2-sd</string>
 	<key>CFBundleVersion</key>
-	<string>2.1.2</string>
+	<string>2.1.2-sd</string>
 	<key>Chrome</key>
 	<dict>
 		<key>Context Menu Items</key>
@@ -37,7 +37,7 @@
 				<key>Filename</key>
 				<string>search.html</string>
 				<key>Height</key>
-				<real>500</real>
+				<integer>500</integer>
 				<key>Identifier</key>
 				<string>keySearchPopover</string>
 				<key>Width</key>
@@ -79,7 +79,9 @@
 		</dict>
 	</dict>
 	<key>Description</key>
-	<string>Use keywords to quickly search any site from the toolbar</string>
+	<string>Use keywords to quickly search any site from the toolbar </string>
+	<key>DeveloperIdentifier</key>
+	<string>0000000000</string>
 	<key>ExtensionInfoDictionaryVersion</key>
 	<string>1.0</string>
 	<key>Permissions</key>
