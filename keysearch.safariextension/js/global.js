@@ -109,6 +109,7 @@ function performKeyboard(keyPressed, fieldVal) {
 }
 
 // Converts the entered text into {key, query, url, subtext}
+var parseQuerySearchDomainResponse;
 function parseQuery(textEntered) {
 	if (textEntered == '') {
 		return {subtext:'KeySearch'};
@@ -134,7 +135,26 @@ function parseQuery(textEntered) {
 				if(key.startsWith("http://") || key.startsWith("https://")) {
 					return {key:'default', query:'', url:key, subtext:key};
 				} else {
-					return {key:'default', query:'', url:"http://"+key, subtext:key};
+					$.ajax({
+						type: "HEAD",
+						async: false,
+						timeout: 100,
+						url: "https://"+key,
+						success: function(message) {
+							// HTTPS success - no further testing needed
+							parseQuerySearchDomainResponse = {key:'default', query:'', url:"https://"+key, subtext:key};
+						},
+						error: function(xhr, exception) {
+							if (xhr.status === 0) {
+								// no connect - fall back to http
+								parseQuerySearchDomainResponse = {key:'default', query:'', url:"http://"+key, subtext:key};
+							} else {
+								// If the server is responding, use https
+								parseQuerySearchDomainResponse = {key:'default', query:'', url:"https://"+key, subtext:key};
+							}
+						}
+					});
+					return parseQuerySearchDomainResponse;
 				}
 			}
 		}
